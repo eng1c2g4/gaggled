@@ -1,0 +1,20 @@
+[versions]
+libgdx = "1.14.2"
+lwjgl = "3.4.2"
+shadow = "9.6.1"
+
+[libraries]
+libgdx = { group = "com.badlogicgames.gdx", name = "gdx", version.ref = "libgdx" }
+libgdx-backend-lwjgl3 = { group = "com.badlogicgames.gdx", name = "gdx-backend-lwjgl3", version.ref = "libgdx" }
+lwjgl = { group = "org.lwjgl", name = "lwjgl", version.ref = "lwjgl" }
+lwjgl-glfw = { group = "org.lwjgl", name = "lwjgl-glfw", version.ref = "lwjgl" }
+lwjgl-jemalloc = { group = "org.lwjgl", name = "lwjgl-jemalloc", version.ref = "lwjgl" }
+lwjgl-openal = { group = "org.lwjgl", name = "lwjgl-openal", version.ref = "lwjgl" }
+lwjgl-opengl = { group = "org.lwjgl", name = "lwjgl-opengl", version.ref = "lwjgl" }
+lwjgl-stb = { group = "org.lwjgl", name = "lwjgl-stb", version.ref = "lwjgl" }
+
+[plugins]
+shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }
+
+[bundles]
+lwjgl = ["lwjgl", "lwjgl-glfw", "lwjgl-jemalloc", "lwjgl-openal", "lwjgl-opengl", "lwjgl-stb"]
