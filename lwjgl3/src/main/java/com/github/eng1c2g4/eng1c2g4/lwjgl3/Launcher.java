@@ -15,7 +15,7 @@ public final class Launcher {
         configuration.setTitle("eng1c2g4");
         configuration.useVsync(true);
         configuration.setForegroundFPS(Lwjgl3ApplicationConfiguration.getDisplayMode().refreshRate + 1);
-        configuration.setWindowedMode(640, 480);
+        configuration.setWindowedMode(1280, 720);
         return configuration;
     }
 
