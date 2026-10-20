@@ -1,0 +1,110 @@
+{
+  "slot_size": 20,
+  "selector_size": 24,
+  "selector_offset": -2,
+  "note": "x/y are the top-left of each slot, measured from the TOP-left of the image",
+  "hotbars": {
+    "3": {
+      "image": "hotbar_backpack_3.png",
+      "image_size": [
+        54,
+        129
+      ],
+      "slots": [
+        {
+          "index": 0,
+          "x": 12,
+          "y": 47
+        },
+        {
+          "index": 1,
+          "x": 12,
+          "y": 70
+        },
+        {
+          "index": 2,
+          "x": 12,
+          "y": 93
+        }
+      ]
+    },
+    "5": {
+      "image": "hotbar_backpack_5.png",
+      "image_size": [
+        54,
+        175
+      ],
+      "slots": [
+        {
+          "index": 0,
+          "x": 12,
+          "y": 47
+        },
+        {
+          "index": 1,
+          "x": 12,
+          "y": 70
+        },
+        {
+          "index": 2,
+          "x": 12,
+          "y": 93
+        },
+        {
+          "index": 3,
+          "x": 12,
+          "y": 116
+        },
+        {
+          "index": 4,
+          "x": 12,
+          "y": 139
+        }
+      ]
+    },
+    "7": {
+      "image": "hotbar_backpack_7.png",
+      "image_size": [
+        54,
+        221
+      ],
+      "slots": [
+        {
+          "index": 0,
+          "x": 12,
+          "y": 47
+        },
+        {
+          "index": 1,
+          "x": 12,
+          "y": 70
+        },
+        {
+          "index": 2,
+          "x": 12,
+          "y": 93
+        },
+        {
+          "index": 3,
+          "x": 12,
+          "y": 116
+        },
+        {
+          "index": 4,
+          "x": 12,
+          "y": 139
+        },
+        {
+          "index": 5,
+          "x": 12,
+          "y": 162
+        },
+        {
+          "index": 6,
+          "x": 12,
+          "y": 185
+        }
+      ]
+    }
+  }
+}
