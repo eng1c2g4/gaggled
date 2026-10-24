@@ -1,0 +1,36 @@
+@startuml Hotbar_select_use_sequence
+title Hotbar- Sequence Diagram: Selecting and Using an Item
+
+autonumber
+actor Player
+participant InputHandler
+participant Hotbar
+participant Item
+
+Player -> InputHandler : press number key n
+InputHandler -> Hotbar: SelectSlot(n)
+activate Hotbar
+alt [index n <= size]
+  Hotbar -> Hotbar : Selected Index = n
+else [index n > size]
+  Hotbar -> Hotbar : ignore input
+end
+deactivate Hotbar
+
+Player -> InputHandler : Activate-item key pressed
+InputHandler -> Hotbar: UseSelectedItem
+activate Hotbar
+alt [selected slot holds an item]
+  Hotbar -> Item : use
+  activate Item
+  Item --> Hotbar : consumed
+  deactivate Item
+  opt [consumed]
+    Hotbar -> Hotbar : empty selected slot
+  end
+else [selected slot empty]
+  Hotbar-> Hotbar: do nothing
+end
+deactivate Hotbar
+
+@enduml

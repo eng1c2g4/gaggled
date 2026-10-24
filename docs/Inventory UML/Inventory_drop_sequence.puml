@@ -1,0 +1,22 @@
+@startuml inventory_drop_sequence
+title Inventory - Sequence Diagram: Dropping an Item
+
+autonumber
+actor Player
+participant InputHandler
+participant Hotbar
+participant World
+
+Player -> InputHandler : press drop key
+InputHandler -> Hotbar : dropSelectedItem
+activate Hotbar
+alt [selected slot holds an item]
+  Hotbar -> Hotbar : empty selected slot
+  Hotbar --> InputHandler : item
+  InputHandler -> World : spawnItem(item, Player Location)
+else [selected slot empty]
+  Hotbar --> InputHandler : nothing
+end
+deactivate Hotbar
+
+@enduml
