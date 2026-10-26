@@ -1,0 +1,27 @@
+title Inventory - Picking Up an Item
+
+autonumber
+actor Player
+participant InputHandler
+participant World
+participant Hotbar
+
+World -> Player : item in range of player
+Player -> InputHandler : pick-up key pressed
+InputHandler -> World : getNearestItem(player location)
+World --> InputHandler : Item
+InputHandler -> Hotbar : pickUp(Item)
+activate Hotbar
+alt [Hotbar has space]
+  Hotbar -> Hotbar : place item into next empty slot
+  Hotbar --> InputHandler : nothing replaced
+  InputHandler -> World : RemoveItem(worldItem)
+else [Hotbar is full]
+  Hotbar -> Hotbar : replace item in selected slot
+  Hotbar --> InputHandler : replaced item
+  InputHandler -> World : removeItem(world-Item)
+  InputHandler -> World : SpawnItem(old-item, player location)
+end
+deactivate Hotbar
+
+@enduml
