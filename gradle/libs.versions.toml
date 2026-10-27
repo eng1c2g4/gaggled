@@ -2,6 +2,7 @@
 ashley = "1.7.4"
 libgdx = "1.14.2"
 lwjgl = "3.4.2"
+jspecify = "1.0.0"
 shadow = "9.6.1"
 
 [libraries]
@@ -14,6 +15,7 @@ lwjgl-jemalloc = { group = "org.lwjgl", name = "lwjgl-jemalloc", version.ref = "
 lwjgl-openal = { group = "org.lwjgl", name = "lwjgl-openal", version.ref = "lwjgl" }
 lwjgl-opengl = { group = "org.lwjgl", name = "lwjgl-opengl", version.ref = "lwjgl" }
 lwjgl-stb = { group = "org.lwjgl", name = "lwjgl-stb", version.ref = "lwjgl" }
+jspecify = { group = "org.jspecify", name = "jspecify", version.ref = "jspecify" }
 
 [plugins]
 shadow = { id = "com.gradleup.shadow", version.ref = "shadow" }
