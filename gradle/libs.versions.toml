@@ -1,9 +1,11 @@
 [versions]
+ashley = "1.7.4"
 libgdx = "1.14.2"
 lwjgl = "3.4.2"
 shadow = "9.6.1"
 
 [libraries]
+ashley = { group = "com.badlogicgames.ashley", name = "ashley", version.ref = "ashley" }
 libgdx = { group = "com.badlogicgames.gdx", name = "gdx", version.ref = "libgdx" }
 libgdx-backend-lwjgl3 = { group = "com.badlogicgames.gdx", name = "gdx-backend-lwjgl3", version.ref = "libgdx" }
 lwjgl = { group = "org.lwjgl", name = "lwjgl", version.ref = "lwjgl" }
