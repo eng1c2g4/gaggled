@@ -1,4 +1,4 @@
-package com.github.eng1c2g4.eng1c2g4.Screens;
+package com.github.eng1c2g4.eng1c2g4.screens;
 
 import com.badlogic.gdx.Screen;
 
