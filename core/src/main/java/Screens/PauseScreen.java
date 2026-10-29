@@ -21,6 +21,10 @@ public class PauseScreen implements Screen {
         table.setDebug(true);
         stage.addActor(table);
 
+        TextButton Resume = new TextButton("Resume");
+        TextButton Settings = new TextButton("Settings");
+        TextButton Quit = new TextButton("Quit");
+
         stage.getViewport().update(width, height, true);
     }
 
@@ -61,4 +65,6 @@ public class PauseScreen implements Screen {
     public void dispose() {
 
     }
+
+    public void input
 }
