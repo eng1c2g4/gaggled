@@ -1,8 +1,14 @@
 package com.github.eng1c2g4.eng1c2g4.screens;
 
 import com.badlogic.gdx.Screen;
+import com.github.eng1c2g4.eng1c2g4.gaggled;
 
 public class LoadingScreen implements Screen {
+    private gaggled game;
+
+    public LoadingScreen(gaggled game){
+        this.game = game;
+    }
     @Override
     public void show() {
 
