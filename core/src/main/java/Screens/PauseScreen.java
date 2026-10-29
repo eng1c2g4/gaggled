@@ -67,5 +67,4 @@ public class PauseScreen implements Screen {
 
     }
 
-    public void input
 }
