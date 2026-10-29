@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 
 public final class GameState extends Game {
 
+    private int score = 0;
 
     private MainScreen mainScreen;
     private MenuScreen menuScreen;
@@ -35,5 +36,9 @@ public final class GameState extends Game {
                 this.setScreen(pauseScreen);
                 break;
         }
+    }
+
+    public void increment_score(int amount) {
+        this.score += amount;
     }
 }

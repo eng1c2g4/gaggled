@@ -3,6 +3,7 @@ package Screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 public class PauseScreen implements Screen {
@@ -20,6 +21,10 @@ public class PauseScreen implements Screen {
         table.setFillParent(true);
         table.setDebug(true);
         stage.addActor(table);
+
+        TextButton Resume = new TextButton("Resume");
+        TextButton Settings = new TextButton("Settings");
+        TextButton Quit = new TextButton("Quit");
 
         stage.getViewport().update(width, height, true);
     }
@@ -61,4 +66,5 @@ public class PauseScreen implements Screen {
     public void dispose() {
 
     }
+
 }
