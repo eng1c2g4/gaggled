@@ -3,6 +3,7 @@ package com.github.eng1c2g4.eng1c2g4.lwjgl3;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import com.github.eng1c2g4.eng1c2g4.Main;
+import com.github.eng1c2g4.eng1c2g4.entity.World;
 
 public final class Launcher {
 
