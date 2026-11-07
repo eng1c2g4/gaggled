@@ -1,14 +1,22 @@
-package com.github.eng1c2g4.eng1c2g4;
+package com.github.eng1c2g4.eng1c2g4.entity.npc_spawning;
 
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 
 public class FindVector {
+    // TODO implement method spriteSize(Entity)
+    private static final float GOOSE_SIZE = 32;
+    private final MapMask mask;
 
+    public FindVector(MapMask mask) {
+        this.mask = mask;
+    }
     /**
      * Returns the distance that the entity spawns from the player.
      * @param entity the type of spawned entity.
      * @return distance from the player.
      */
+
     private static int spawnDistance(String entity) {
         int distance;
 
@@ -32,19 +40,17 @@ public class FindVector {
      * @param entity the entity type spawning.
      * @return Vector2 the position of the entity created.
      */
-    public static Vector2 generatePosition(Vector2 PlayerVector, String entity) {
-
+    public Vector2 generatePosition(Vector2 PlayerVector, String entity) {
         int distance = spawnDistance(entity);
 
-
+        //JDB, converted possible_angle to a float
         while (true) {
             float enitiy_x = PlayerVector.x;
             float entity_y = PlayerVector.y;
 
-            int possible_angle = (int)(Math.random() * 361);
-
-            enitiy_x += (float)(distance * Math.sin(possible_angle));
-            entity_y += (float)(distance * Math.cos(possible_angle));
+            float possible_angle = MathUtils.random(360f);
+            enitiy_x += distance * MathUtils.sinDeg(possible_angle);
+            entity_y += distance * MathUtils.cosDeg(possible_angle);
 
             if (checkPosition(enitiy_x, entity_y, entity)) {
                 return new Vector2(enitiy_x, entity_y);
@@ -58,17 +64,14 @@ public class FindVector {
      * @param y the y component of the vector.
      * @return boolean if it is available.
      */
-    private static boolean checkPosition(float x, float y, String entity) {
+    private boolean checkPosition(float x, float y, String entity) {
+        float size = GOOSE_SIZE;
+        MapMask.areaCondition area = this.mask.checkArea(x, y, size, size);
 
-        RedBlue redBlue = checkMask.checkArea(x, y, entity);
-
-        if (redBlue.hasRed()) {
-            return false;
-        } else if (redBlue.hasBlue() && entity.equals("Item")) {
-            // This make it so that items priorities or are more likely to spawn on land.
-            return (Math.random() * 2) >= 1;
-        } else {
-            return true;
-        }
+        if (area.outOfBounds()) {return false;}
+        else if (area.water() && entity.equals("Item")) {
+            // This make it so that items priorities or are more likely to spawn on land
+            return Math.random() * 2 >= 1;
+        } else {return true;}
     }
 }
