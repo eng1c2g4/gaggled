@@ -1,45 +1,47 @@
-package com.github.eng1c2g4.eng1c2g4.screens;
+package Screens;
 
-import com.badlogic.ashley.core.Engine;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.github.eng1c2g4.eng1c2g4.Main;
+import Screens.GameState;
 import com.github.eng1c2g4.eng1c2g4.entity.*;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 
 
 public class GameScreen implements Screen {
-    private final Main main;
-
+    private final GameState main;
     private World world;
     private OrthographicCamera camera;
     private SpriteBatch batch;
 
 
-
-    public GameScreen(Main main) {
+    public GameScreen(GameState main)  {
         this.main = main;
 
         this.camera = new OrthographicCamera(1280,720);
         this.batch = new SpriteBatch();
 
         world = new World();
-
-
-
     }
 
 
     @Override
     public void show() {
-
+        Gdx.input.setInputProcessor(new com.badlogic.gdx.InputAdapter() {
+            @Override
+            public boolean keyDown(int keycode) {
+                if (keycode == Input.Keys.ESCAPE) {
+                    main.changeScreen(GameState.PAUSE);
+                    return true;
+                }
+                return false;
+            }
+        });
     }
-
     @Override
     public void render(float delta) {
 
@@ -76,6 +78,4 @@ public class GameScreen implements Screen {
     public void hide() {
 
     }
-
-
 }
