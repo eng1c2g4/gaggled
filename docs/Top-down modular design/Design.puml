@@ -1,0 +1,36 @@
+@startwbs
+* Game
+** Menu
+*** Start
+*** Exit
+** Game Map
+*** GUI Layer
+**** Map sprite
+**** Player sprite
+**** Enemy sprite
+**** Event sprites/Item sprites
+**** Inventory sprite
+**** Timer sprite
+**** HealthBar sprite
+**** Score sprite
+***< Texture Layer
+***< Entities
+****< Player entity
+****< Enemy entity
+****< Event entity/Item entity
+** Logic
+*** Updating inventory
+**** Update array
+**** Update UI
+*** Updating map
+*** Input handling
+*** Camera
+*** Timer logic
+*** Enemy AI
+**** Pathfinding
+**** Movement
+*** Collision detection
+**** Hitboxes
+**** Update health
+** Finish
+@endwbs

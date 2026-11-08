@@ -1,0 +1,20 @@
+@startuml item_state
+title Item - State Diagram
+
+state "In world" as InWorld
+state "Held in hotbar" as Held
+state "Active" as Active
+state "Not in world" as Consumed
+
+[*] --> InWorld : item placed on map
+
+InWorld --> Held : player picks it up [inventory has space]
+Held --> InWorld : player drops item
+
+Held --> Held : player uses item [Non-consumable] kept in inventory
+Held --> Consumed : player uses it [Consumable] / apply effect
+Held --> Active : player uses timed item, start effect/countdown.
+Active --> Consumed : Time reaches 0.
+Consumed --> [*] : item depleated / free slot, remove from render
+
+@enduml
