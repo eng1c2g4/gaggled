@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
-import Screens.GameState;
+import com.github.eng1c2g4.eng1c2g4.GameState;
 import com.github.eng1c2g4.eng1c2g4.entity.*;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;

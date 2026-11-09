@@ -12,7 +12,8 @@ import com.github.eng1c2g4.eng1c2g4.entity.PlayerFactory;
 public class World {
     private final Engine engine;
 
-
+    /**
+     *  */
     public World(){
         engine = new Engine();
 
@@ -23,6 +24,8 @@ public class World {
         PlayerFactory.create(engine,new Vector2(100,100));
 
     }
+    /**
+     *  */
     public void update(float deltaTime){
         engine.update(deltaTime);
     }

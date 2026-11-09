@@ -27,20 +27,22 @@ public final class PlayerInputSystem extends IteratingSystem {
         if (Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.UP)) {
             //velocity.y += acceleration.y * deltaTime;
             velocity.y += 5;
-        }
-
-        else if (Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            //velocity.x -= acceleration.x * deltaTime;
-            velocity.x -= 5;
-        }
-        else if (Gdx.input.isKeyPressed(Input.Keys.S) || Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+        } else if (Gdx.input.isKeyPressed(Input.Keys.S) || Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
             //velocity.y -= acceleration.y * deltaTime;
             velocity.y -= 5;
+        } else {
+            velocity.y = 0;
         }
-        else if (Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+            //velocity.x -= acceleration.x * deltaTime;
+            velocity.x -= 5;
+        }else if (Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
             //velocity.x += acceleration.y * deltaTime;
             velocity.x += 5;
 
+        } else {
+            velocity.x = 0;
         }
+
     }
 }

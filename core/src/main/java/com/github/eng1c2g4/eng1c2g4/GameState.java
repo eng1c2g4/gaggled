@@ -1,5 +1,6 @@
-package Screens;
+package com.github.eng1c2g4.eng1c2g4;
 
+import Screens.*;
 import com.badlogic.gdx.Game;
 import java.util.Stack;
 
@@ -81,5 +82,17 @@ public class  GameState extends Game {
 
     public void increment_score(int amount) {
         this.score += amount;
+    }
+
+    public void render() {
+        super.render();
+        //if (this.engine == null) return;
+        //this.engine.update(0.25f); // todo: actual delta time
+    }
+
+    @Override
+    public void dispose() {
+        super.dispose();
+        //if (this.gooseFactory != null) this.gooseFactory.dispose();
     }
 }

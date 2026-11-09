@@ -2,6 +2,7 @@ package com.github.eng1c2g4.eng1c2g4;
 
 import com.badlogic.gdx.math.Vector2;
 
+
 public class FindVector {
 
     /**
@@ -59,8 +60,8 @@ public class FindVector {
      * @return boolean if it is available.
      */
     private static boolean checkPosition(float x, float y, String entity) {
-
-        RedBlue redBlue = checkMask.checkArea(x, y, entity);
+        /*
+        RedBlue redBlue = checkArea(x, y, entity);
 
         if (redBlue.hasRed()) {
             return false;
@@ -70,5 +71,8 @@ public class FindVector {
         } else {
             return true;
         }
+        todo:This is current a WIP
+         */
+        return true;
     }
 }
