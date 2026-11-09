@@ -1,6 +1,7 @@
 package com.github.eng1c2g4.eng1c2g4.entity;
 
 import com.badlogic.ashley.core.Engine;
+import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -21,7 +22,7 @@ public class World {
         engine.addSystem(new PlayerInputSystem());
         engine.addSystem(new RenderSystem());
 
-        PlayerFactory.create(engine,new Vector2(100,100));
+        Entity player = PlayerFactory.create(engine,new Vector2(0,0));
 
     }
     /**

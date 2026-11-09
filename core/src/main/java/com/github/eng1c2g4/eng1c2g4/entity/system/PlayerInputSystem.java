@@ -9,7 +9,7 @@ import com.github.eng1c2g4.eng1c2g4.entity.component.PositionComponent;
 import com.github.eng1c2g4.eng1c2g4.entity.component.VelocityComponent;
 
 public final class PlayerInputSystem extends IteratingSystem {
-
+    private static final float MAX_VELOCITY = 50;
     private static final ComponentMapper<PositionComponent> POSITION = ComponentMapper.getFor(PositionComponent.class);
     private static final ComponentMapper<VelocityComponent> VELOCITY = ComponentMapper.getFor(VelocityComponent.class);
 
@@ -26,22 +26,40 @@ public final class PlayerInputSystem extends IteratingSystem {
 
         if (Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.UP)) {
             //velocity.y += acceleration.y * deltaTime;
-            velocity.y += 5;
+            if (velocity.y <= MAX_VELOCITY) {
+                velocity.y += 5;
+            }
+
         } else if (Gdx.input.isKeyPressed(Input.Keys.S) || Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
             //velocity.y -= acceleration.y * deltaTime;
-            velocity.y -= 5;
+
+            if (velocity.y >= -MAX_VELOCITY) {
+                velocity.y -= 5;
+            }
         } else {
-            velocity.y = 0;
+            if (Math.abs(velocity.y) > 10/* Placeholder */){
+                acceleration.y = velocity.y *-0.8f;
+            } else {
+                acceleration.y = 0;
+                velocity.y = 0;
+            }
         }
         if (Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            //velocity.x -= acceleration.x * deltaTime;
-            velocity.x -= 5;
+            if (velocity.x >= -MAX_VELOCITY) {
+                velocity.x -= 5;
+            }
         }else if (Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            //velocity.x += acceleration.y * deltaTime;
-            velocity.x += 5;
+            if (velocity.x <= MAX_VELOCITY) {
+                velocity.x += 5;
+            }
 
         } else {
-            velocity.x = 0;
+            if (Math.abs(velocity.x) > 10/* Placeholder */){
+                acceleration.x = velocity.x *-0.8f;
+            } else {
+                acceleration.x = 0;
+                velocity.x = 0;
+            }
         }
 
     }
