@@ -1,13 +1,13 @@
 package com.github.eng1c2g4.eng1c2g4.lwjgl3;
 
+import com.github.eng1c2g4.eng1c2g4.GameState;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
-import com.github.eng1c2g4.eng1c2g4.Main;
 
 public final class Launcher {
 
     public static void main(String[] args) {
-        new Lwjgl3Application(new Main(), buildConfiguration());
+        new Lwjgl3Application(new GameState(), buildConfiguration());
     }
 
     private static Lwjgl3ApplicationConfiguration buildConfiguration() {
