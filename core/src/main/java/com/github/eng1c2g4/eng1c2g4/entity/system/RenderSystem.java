@@ -14,6 +14,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.github.eng1c2g4.eng1c2g4.entity.component.AnimatedComponent;
 import com.github.eng1c2g4.eng1c2g4.entity.component.PositionComponent;
+import com.github.eng1c2g4.eng1c2g4.entity.component.ScaledComponent;
 import com.github.eng1c2g4.eng1c2g4.entity.component.TextureComponent;
 import com.github.eng1c2g4.eng1c2g4.entity.component.VelocityComponent;
 
@@ -25,6 +26,7 @@ public final class RenderSystem extends EntitySystem {
     private static final ComponentMapper<VelocityComponent> VELOCITY = ComponentMapper.getFor(VelocityComponent.class);
     private static final ComponentMapper<TextureComponent> TEXTURE = ComponentMapper.getFor(TextureComponent.class);
     private static final ComponentMapper<AnimatedComponent> ANIMATED = ComponentMapper.getFor(AnimatedComponent.class);
+    private static final ComponentMapper<ScaledComponent> SCALED = ComponentMapper.getFor(ScaledComponent.class);
     private final Batch batch = new SpriteBatch();
 
     private ImmutableArray<Entity> entities = new ImmutableArray<>(Array.with());
@@ -54,7 +56,16 @@ public final class RenderSystem extends EntitySystem {
             }
 
             if (texture == null) texture = new TextureRegion(TEXTURE.get(entity).texture());
+
             this.batch.draw(texture, position.x, position.y);
+            float width = texture.getRegionWidth();
+            if (!SCALED.has(entity)) {
+                this.batch.draw(texture, position.x - width / 2, position.y);
+                continue;
+            }
+            float scale = SCALED.get(entity).scale();
+            width *= scale;
+            this.batch.draw(texture, position.x - width / 2, position.y, texture.getWidth() * scale, texture.getHeight() * scale);
         }
         this.batch.end();
 
