@@ -56,7 +56,7 @@ public class FindVector {
 
             if (checkPosition(enitiy_x, entity_y, entity)) {
                 float cornerOfSprite_x = enitiy_x - (float) entity.getWidth()/2;
-                float cornerOfSprite_y = enitiy_x - (float) entity.getWidth()/2;
+                float cornerOfSprite_y = enitiy_x - (float) entity.getHeight()/2;
                 return new Vector2(cornerOfSprite_x, cornerOfSprite_y);
             }
         }
