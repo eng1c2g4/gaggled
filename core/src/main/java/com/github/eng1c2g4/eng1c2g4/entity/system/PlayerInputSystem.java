@@ -9,12 +9,13 @@ import com.badlogic.gdx.math.Vector2;
 import com.github.eng1c2g4.eng1c2g4.entity.component.PositionComponent;
 import com.github.eng1c2g4.eng1c2g4.entity.component.TextureComponent;
 import com.github.eng1c2g4.eng1c2g4.entity.component.VelocityComponent;
+import java.util.stream.Stream;
 
 public final class PlayerInputSystem extends IteratingSystem {
     private static final float MAX_VELOCITY = 50;
-    private static final ComponentMapper<PositionComponent> POSITION = ComponentMapper.getFor(PositionComponent.class);
+    private static final float ACCELERATION = 5;
+
     private static final ComponentMapper<VelocityComponent> VELOCITY = ComponentMapper.getFor(VelocityComponent.class);
-    private static final ComponentMapper<TextureComponent> TEXTURE = ComponentMapper.getFor(TextureComponent.class);
 
     public PlayerInputSystem(){
         super(Family.all(PositionComponent.class, VelocityComponent.class).get());
@@ -22,51 +23,22 @@ public final class PlayerInputSystem extends IteratingSystem {
 
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
-        VelocityComponent velocityComponent = VELOCITY.get(entity);
-        TextureComponent textureComponent = TEXTURE.get(entity);
-        Vector2 acceleration = velocityComponent.acceleration();
-        Vector2 velocity = velocityComponent.velocity();
-        Vector2 position = POSITION.get(entity).position();
-        Texture texture = textureComponent.texture(); //todo: Animation if we feel like it
+        Vector2 velocity = VELOCITY.get(entity).velocity();
 
-        if (Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.UP)) {
-            texture = new Texture("sprites/student_walk.png");
-            if (velocity.y <= MAX_VELOCITY) {
-                velocity.y += 5;
-            }
+        // detect key presses
+        boolean up = Stream.of(Input.Keys.W, Input.Keys.UP).anyMatch(Gdx.input::isKeyPressed);
+        boolean down = Stream.of(Input.Keys.S, Input.Keys.DOWN).anyMatch(Gdx.input::isKeyPressed);
+        boolean left = Stream.of(Input.Keys.A, Input.Keys.LEFT).anyMatch(Gdx.input::isKeyPressed);
+        boolean right = Stream.of(Input.Keys.D, Input.Keys.RIGHT).anyMatch(Gdx.input::isKeyPressed);
 
-        } else if (Gdx.input.isKeyPressed(Input.Keys.S) || Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-            texture = new Texture("sprites/student_walk.png");
-            if (velocity.y >= -MAX_VELOCITY) {
-                velocity.y -= 5;
-            }
-        } else {
-            if (Math.abs(velocity.y) > 10/* Placeholder */){
-                acceleration.y = velocity.y *-0.8f;
-            } else {
-                texture = new Texture("sprites/student.png");
-                acceleration.y = 0;
-                velocity.y = 0;
-            }
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            if (velocity.x >= -MAX_VELOCITY) {
-                velocity.x -= 5;
-            }
-        }else if (Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            if (velocity.x <= MAX_VELOCITY) {
-                velocity.x += 5;
-            }
+        // handle up and down movement
+        if (!(up || down)) velocity.y = 0;
+        else if (up && velocity.y <= MAX_VELOCITY) velocity.y += ACCELERATION;
+        else if (down && velocity.y >= -MAX_VELOCITY) velocity.y -= ACCELERATION;
 
-        } else {
-            if (Math.abs(velocity.x) > 10/* Placeholder */){
-                acceleration.x = velocity.x *-0.8f;
-            } else {
-                texture = new Texture("sprites/student.png");
-                acceleration.x = 0;
-                velocity.x = 0;
-            }
-        }
-
+        // handle left and right movement
+        if (!(left || right)) velocity.x = 0;
+        else if (left && velocity.x >= -MAX_VELOCITY) velocity.x -= ACCELERATION;
+        else if (right && velocity.x <= MAX_VELOCITY) velocity.x += ACCELERATION;
     }
 }
