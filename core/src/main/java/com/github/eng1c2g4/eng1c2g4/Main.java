@@ -7,8 +7,6 @@ import com.badlogic.gdx.Gdx;                                          // new
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.github.eng1c2g4.eng1c2g4.entity.GooseFactory;
-import com.github.eng1c2g4.eng1c2g4.entity.npc_spawning.FindVector;
-import com.github.eng1c2g4.eng1c2g4.entity.npc_spawning.MapMask;
 import com.github.eng1c2g4.eng1c2g4.entity.system.MovementSystem;
 import com.github.eng1c2g4.eng1c2g4.entity.system.RenderSystem;
 import org.jspecify.annotations.Nullable;

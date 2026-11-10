@@ -1,7 +1,8 @@
-package com.github.eng1c2g4.eng1c2g4.entity.npc_spawning;
+package com.github.eng1c2g4.eng1c2g4;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.github.eng1c2g4.eng1c2g4.entity.EntityType;
 
 public class FindVector {
     // TODO implement method spriteSize(Entity)
@@ -17,7 +18,7 @@ public class FindVector {
      * @return distance from the player.
      */
 
-    private static int spawnDistance(String entity) {
+    private static int spawnDistance(EntityType entity) {
         int distance;
 
         if (entity.equals("Goose")) {
@@ -40,7 +41,7 @@ public class FindVector {
      * @param entity the entity type spawning.
      * @return Vector2 the position of the entity created.
      */
-    public Vector2 generatePosition(Vector2 PlayerVector, String entity) {
+    public Vector2 generatePosition(Vector2 PlayerVector, EntityType entity) {
         int distance = spawnDistance(entity);
 
         //JDB, converted possible_angle to a float
@@ -64,7 +65,7 @@ public class FindVector {
      * @param y the y component of the vector.
      * @return boolean if it is available.
      */
-    private boolean checkPosition(float x, float y, String entity) {
+    private boolean checkPosition(float x, float y, EntityType entity) {
         float size = GOOSE_SIZE;
         MapMask.areaCondition area = this.mask.checkArea(x, y, size, size);
 
