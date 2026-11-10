@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+import com.github.eng1c2g4.eng1c2g4.entity.component.PlayerInputComponent;
 import com.github.eng1c2g4.eng1c2g4.entity.component.PositionComponent;
 import com.github.eng1c2g4.eng1c2g4.entity.component.TextureComponent;
 import com.github.eng1c2g4.eng1c2g4.entity.component.VelocityComponent;
@@ -18,7 +19,7 @@ public final class PlayerInputSystem extends IteratingSystem {
     private static final ComponentMapper<VelocityComponent> VELOCITY = ComponentMapper.getFor(VelocityComponent.class);
 
     public PlayerInputSystem(){
-        super(Family.all(PositionComponent.class, VelocityComponent.class).get());
+        super(Family.all(PositionComponent.class, VelocityComponent.class, PlayerInputComponent.class).get());
     }
 
     @Override
