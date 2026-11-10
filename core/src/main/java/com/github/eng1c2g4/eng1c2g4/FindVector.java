@@ -47,17 +47,17 @@ public class FindVector {
 
         //JDB, converted possible_angle to a float
         while (true) {
-            float enitiy_x = PlayerVector.x;
+            float entity_x = PlayerVector.x;
             float entity_y = PlayerVector.y;
 
             float possible_angle = MathUtils.random(360f);
-            enitiy_x += distance * MathUtils.sinDeg(possible_angle);
+            entity_x += distance * MathUtils.sinDeg(possible_angle);
             entity_y += distance * MathUtils.cosDeg(possible_angle);
 
-            if (checkPosition(enitiy_x, entity_y, entity)) {
-                float cornerOfSprite_x = enitiy_x - (float) entity.getWidth()/2;
-                float cornerOfSprite_y = enitiy_x - (float) entity.getHeight()/2;
-                return new Vector2(cornerOfSprite_x, cornerOfSprite_y);
+            if (checkPosition(entity_x, entity_y, entity)) {
+                float bottomOfSprite_y = entity_y - (float) entity.getHeight()/2;
+                System.out.printf("%f, %f", entity_x, bottomOfSprite_y);
+                return new Vector2(entity_x, bottomOfSprite_y);
             }
         }
     }

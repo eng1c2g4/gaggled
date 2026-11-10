@@ -13,15 +13,11 @@ public enum EntityType {
         this.height = height;
     }
 
-    public int getWidth() {
-        return this.width;
-    }
-
     public int getHeight() {
         return this.height;
     }
-    
+
     public float getDistanceToCenter() {
-        return (float) Math.sqrt(Math.pow(this.width, 2) * Math.pow(this.height, 2));
+        return (float) Math.sqrt(Math.pow(this.width, 2) + Math.pow(this.height, 2));
     }
 }
