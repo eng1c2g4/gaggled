@@ -17,7 +17,8 @@ public final class PlayerFactory implements Disposable {
     public static Entity create(Engine engine, Vector2 spawnPosition) {
         Entity player = new Entity();
         player.add(textureComponent);
-        player.add(new PositionComponent(spawnPosition));
+
+        player.add(new PositionComponent(new Vector2(Gdx.graphics.getWidth()/2f,Gdx.graphics.getHeight()/2f)));
         player.add(new VelocityComponent(new Vector2(), new Vector2()));
 
         engine.addEntity(player);
