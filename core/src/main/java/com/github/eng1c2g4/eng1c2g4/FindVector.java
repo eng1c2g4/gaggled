@@ -18,19 +18,20 @@ public class FindVector {
      * @return distance from the player.
      */
 
-    private static int spawnDistance(EntityType entity) {
-        int distance;
+    private static float spawnDistance(EntityType entity) {
+        float cameraDistance = 100;
+        float distance;
 
-        if (entity.equals("Goose")) {
+        if (entity == EntityType.GOOSE) {
             // Half the length of the player sight,
-            distance = 100; // make this a function
+            distance = cameraDistance; // make this a function
         } else {
             // Distance within camera range.
-            distance = 100;
+            distance = (float)(cameraDistance * (0.2 + Math.random() * 0.6));
         }
         // Combined distance to spawn entity and distance to sprite center.
 
-        return distance + 100; // make this a function
+        return distance + entity.getDistanceToCenter(); // make this a function
     }
 
     /**
@@ -42,7 +43,7 @@ public class FindVector {
      * @return Vector2 the position of the entity created.
      */
     public Vector2 generatePosition(Vector2 PlayerVector, EntityType entity) {
-        int distance = spawnDistance(entity);
+        float distance = spawnDistance(entity);
 
         //JDB, converted possible_angle to a float
         while (true) {
@@ -54,7 +55,9 @@ public class FindVector {
             entity_y += distance * MathUtils.cosDeg(possible_angle);
 
             if (checkPosition(enitiy_x, entity_y, entity)) {
-                return new Vector2(enitiy_x, entity_y);
+                float cornerOfSprite_x = enitiy_x - (float) entity.getWidth()/2;
+                float cornerOfSprite_y = enitiy_x - (float) entity.getWidth()/2;
+                return new Vector2(cornerOfSprite_x, cornerOfSprite_y);
             }
         }
     }
@@ -70,7 +73,7 @@ public class FindVector {
         MapMask.areaCondition area = this.mask.checkArea(x, y, size, size);
 
         if (area.outOfBounds()) {return false;}
-        else if (area.water() && entity.equals("Item")) {
+        else if (area.water() && entity == EntityType.ITEM) {
             // This make it so that items priorities or are more likely to spawn on land
             return Math.random() * 2 >= 1;
         } else {return true;}
