@@ -57,7 +57,6 @@ public final class RenderSystem extends EntitySystem {
 
             if (texture == null) texture = new TextureRegion(TEXTURE.get(entity).texture());
 
-            this.batch.draw(texture, position.x, position.y);
             float width = texture.getRegionWidth();
             if (!SCALED.has(entity)) {
                 this.batch.draw(texture, position.x - width / 2, position.y);
@@ -65,7 +64,7 @@ public final class RenderSystem extends EntitySystem {
             }
             float scale = SCALED.get(entity).scale();
             width *= scale;
-            this.batch.draw(texture, position.x - width / 2, position.y, texture.getWidth() * scale, texture.getHeight() * scale);
+            this.batch.draw(texture, position.x - width / 2, position.y, texture.getRegionWidth() * scale, texture.getRegionHeight() * scale);
         }
         this.batch.end();
 
