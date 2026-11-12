@@ -10,4 +10,8 @@ public sealed interface Event {
         public static Set<EventListener<EnterArea>> LISTENERS = new HashSet<>();
     }
 
+    record SocialBatteryDecreased(int amount, int newSocialBattery) implements Event {
+        public static Set<EventListener<SocialBatteryDecreased>> LISTENERS = new HashSet<>();
+    }
+
 }
