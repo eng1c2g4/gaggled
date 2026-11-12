@@ -7,7 +7,7 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.math.Vector2;
 import com.github.eng1c2g4.eng1c2g4.area.Area;
 import com.github.eng1c2g4.eng1c2g4.area.AreaRegistry;
-import com.github.eng1c2g4.eng1c2g4.entity.component.PlayerInputComponent;
+import com.github.eng1c2g4.eng1c2g4.entity.component.PlayerComponent;
 import com.github.eng1c2g4.eng1c2g4.entity.component.PositionComponent;
 import com.github.eng1c2g4.eng1c2g4.event.Event;
 import com.github.eng1c2g4.eng1c2g4.event.EventListener;
@@ -22,7 +22,7 @@ public final class AreaEntrySystem extends IteratingSystem {
     private final AreaRegistry registry;
 
     public AreaEntrySystem(AreaRegistry registry) {
-        super(Family.all(PositionComponent.class, PlayerInputComponent.class).get());
+        super(Family.all(PositionComponent.class, PlayerComponent.class).get());
         this.registry = registry;
     }
 
@@ -34,8 +34,9 @@ public final class AreaEntrySystem extends IteratingSystem {
         Set<Area> newAreas = new HashSet<>(currentAreas);
         newAreas.removeAll(this.inside);
         for (Area area : newAreas) {
+            Event.EnterArea event = new Event.EnterArea(area);
             for (EventListener<Event.EnterArea> listener : Event.EnterArea.LISTENERS) {
-                listener.handle(new Event.EnterArea(area));
+                listener.handle(event);
             }
         }
 
