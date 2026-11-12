@@ -5,8 +5,12 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.math.Vector2;
+import com.github.eng1c2g4.eng1c2g4.area.Area;
+import com.github.eng1c2g4.eng1c2g4.area.AreaRegistry;
+import com.github.eng1c2g4.eng1c2g4.entity.component.PlayerInputComponent;
 import com.github.eng1c2g4.eng1c2g4.entity.component.PositionComponent;
 import com.github.eng1c2g4.eng1c2g4.entity.component.VelocityComponent;
+import java.util.Set;
 
 public final class MovementSystem extends IteratingSystem {
 
