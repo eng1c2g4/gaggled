@@ -26,5 +26,7 @@ tasks.jar {
 
 tasks.shadowJar {
     archiveBaseName = rootProject.name
+    from("../") {
+        include("assets/**/*")
+    }
 }
-
