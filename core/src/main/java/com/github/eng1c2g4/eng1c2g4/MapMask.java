@@ -1,4 +1,4 @@
-package com.github.eng1c2g4.eng1c2g4.entity.npc_spawning;
+package com.github.eng1c2g4.eng1c2g4;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Pixmap;
