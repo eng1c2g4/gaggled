@@ -20,4 +20,6 @@ public interface Inventory {
      */
     boolean insert(Item item);
 
+    boolean isFull();
+
 }

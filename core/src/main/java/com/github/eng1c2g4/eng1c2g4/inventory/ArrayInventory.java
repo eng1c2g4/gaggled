@@ -9,6 +9,8 @@ public class ArrayInventory implements Inventory {
 
     protected final @Nullable Item[] backend;
 
+    private int count = 0;
+
     /**
      * Construct a new {@link ArrayInventory} with a provided size.
      *
@@ -36,9 +38,19 @@ public class ArrayInventory implements Inventory {
         for (int i = 0; i < this.backend.length; i++) {
             if (this.backend[i] != null) continue;
             this.backend[i] = item;
+            this.count++;
             return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean isFull() {
+        return this.count == this.backend.length;
+    }
+
+    public @Nullable Item[] getItems() {
+        return this.backend;
     }
 
 }
