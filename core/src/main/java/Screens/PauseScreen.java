@@ -26,7 +26,7 @@ public class PauseScreen implements Screen {
 
         Table table = new Table();
         table.setFillParent(true);
-        table.setDebug(true);
+        table.setDebug(false);
         stage.addActor(table);
 
         skin = new Skin(Gdx.files.internal("ui/uiskin.json"));
