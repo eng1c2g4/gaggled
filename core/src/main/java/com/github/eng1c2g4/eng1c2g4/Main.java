@@ -63,4 +63,5 @@ public final class Main extends Game {
         if (this.gooseFactory != null) this.gooseFactory.dispose();
         if (this.mapMask != null) this.mapMask.dispose();
     }
+
 }
