@@ -13,10 +13,15 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.github.eng1c2g4.eng1c2g4.entity.component.AnimatedComponent;
+import com.github.eng1c2g4.eng1c2g4.entity.component.InventoryComponent;
 import com.github.eng1c2g4.eng1c2g4.entity.component.PositionComponent;
 import com.github.eng1c2g4.eng1c2g4.entity.component.ScaledComponent;
 import com.github.eng1c2g4.eng1c2g4.entity.component.TextureComponent;
 import com.github.eng1c2g4.eng1c2g4.entity.component.VelocityComponent;
+import com.github.eng1c2g4.eng1c2g4.inventory.ArrayInventory;
+import com.github.eng1c2g4.eng1c2g4.inventory.Inventory;
+import com.github.eng1c2g4.eng1c2g4.inventory.Item;
+import com.github.eng1c2g4.eng1c2g4.inventory.PlayerInventory;
 
 public final class RenderSystem extends EntitySystem {
 
@@ -27,6 +32,7 @@ public final class RenderSystem extends EntitySystem {
     private static final ComponentMapper<TextureComponent> TEXTURE = ComponentMapper.getFor(TextureComponent.class);
     private static final ComponentMapper<AnimatedComponent> ANIMATED = ComponentMapper.getFor(AnimatedComponent.class);
     private static final ComponentMapper<ScaledComponent> SCALED = ComponentMapper.getFor(ScaledComponent.class);
+    private static final ComponentMapper<InventoryComponent> INVENTORY = ComponentMapper.getFor(InventoryComponent.class);
     private final Batch batch = new SpriteBatch();
 
     private ImmutableArray<Entity> entities = new ImmutableArray<>(Array.with());
@@ -41,6 +47,8 @@ public final class RenderSystem extends EntitySystem {
     public void update(float deltaTime) {
         this.batch.begin();
         for (Entity entity : this.entities) {
+            if (INVENTORY.has(entity)) renderInventory(entity);
+
             Vector2 position = POSITION.get(entity).position();
 
             TextureRegion texture = null;
@@ -65,9 +73,21 @@ public final class RenderSystem extends EntitySystem {
             float scale = SCALED.get(entity).scale();
             width *= scale;
             this.batch.draw(texture, position.x - width / 2, position.y, texture.getRegionWidth() * scale, texture.getRegionHeight() * scale);
+
         }
         this.batch.end();
-
-
     }
+
+    private void renderInventory(Entity entity) {
+        Inventory inventory = INVENTORY.get(entity).inventory();
+        if (!(inventory instanceof PlayerInventory playerInventory)) return; // kind of a hack
+        int x = 0;
+        for (Item item : playerInventory.getItems()) {
+            x += 64;
+            if (item == null) continue;
+            Texture itemTexture = item.getType().texture();
+            this.batch.draw(itemTexture, x, 100, 64, 64);
+        }
+    }
+
 }
