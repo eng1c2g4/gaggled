@@ -5,25 +5,23 @@ import com.badlogic.gdx.math.Vector2;
 import com.github.eng1c2g4.eng1c2g4.entity.EntityType;
 
 public class FindVector {
-    // TODO implement method spriteSize(Entity)
-    private static final float GOOSE_SIZE = 32;
     private final MapMask mask;
 
     public FindVector(MapMask mask) {
         this.mask = mask;
     }
+
     /**
      * Returns the distance that the entity spawns from the player.
      * @param entity the type of spawned entity.
      * @return distance from the player.
      */
-
     private static float spawnDistance(EntityType entity) {
-        float cameraDistance = 100;
+        float cameraDistance = 100; // placeholder number for diagonal camera radius
         float distance;
 
         if (entity == EntityType.GOOSE) {
-            // Half the length of the player sight,
+            // diagonal radius of player sight added
             distance = cameraDistance; // make this a function
         } else {
             // Distance within camera range.
@@ -55,8 +53,8 @@ public class FindVector {
             entity_y += distance * MathUtils.cosDeg(possible_angle);
 
             if (checkPosition(entity_x, entity_y, entity)) {
+                // returns the vector of the goose adjusted to how it spawns.
                 float bottomOfSprite_y = entity_y - (float) entity.getHeight()/2;
-                System.out.printf("%f, %f", entity_x, bottomOfSprite_y);
                 return new Vector2(entity_x, bottomOfSprite_y);
             }
         }
@@ -69,7 +67,7 @@ public class FindVector {
      * @return boolean if it is available.
      */
     private boolean checkPosition(float x, float y, EntityType entity) {
-        float size = GOOSE_SIZE;
+        float size = entity.getHeight();
         MapMask.areaCondition area = this.mask.checkArea(x, y, size, size);
 
         if (area.outOfBounds()) {return false;}
