@@ -5,6 +5,8 @@ import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.github.eng1c2g4.eng1c2g4.area.Area;
 import com.github.eng1c2g4.eng1c2g4.area.AreaRegistry;
@@ -21,12 +23,18 @@ import com.github.eng1c2g4.eng1c2g4.entity.component.PositionComponent;
 import com.github.eng1c2g4.eng1c2g4.entity.system.*;
 import com.github.eng1c2g4.eng1c2g4.inventory.Item;
 import com.github.eng1c2g4.eng1c2g4.inventory.ItemType;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import org.jspecify.annotations.Nullable;
 
 public class World {
     private final Engine engine;
     private final FindVector findVector = new FindVector(new MapMask());
     private final GooseFactory gooseFactory;
     private int GooseToSpawn = 24;
+    private @Nullable Instant startTime = Instant.now();
+    private final SpriteBatch batch = new SpriteBatch();
+    private final BitmapFont font = new BitmapFont();
 
     public Entity player;
     /**
@@ -73,9 +81,12 @@ public class World {
                 ), new Vector2(150, 600)
         ));
     }
+
     /**
      *  */
     public void update(float deltaTime){
+        if (this.startTime == null) this.startTime = Instant.now();
+
         engine.update(deltaTime);
         if (GooseToSpawn != 0) {
             GooseToSpawn -= 1;
@@ -84,5 +95,13 @@ public class World {
             this.engine.addEntity(this.gooseFactory.create(position_of_spawn));
         }
 
+        if (this.startTime == null) return;
+        this.batch.begin();
+        this.font.draw(this.batch, Long.toString(this.startTime.until(Instant.now(), ChronoUnit.SECONDS)), 600, 100);
+        this.batch.end();
+
+        if (Instant.now().isAfter(this.startTime.plusSeconds(60 * 5))) {
+            Gdx.app.exit();
+        }
     }
 }
