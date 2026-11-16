@@ -7,7 +7,6 @@ import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.math.Vector2;
 import com.github.eng1c2g4.eng1c2g4.area.Area;
 import com.github.eng1c2g4.eng1c2g4.area.AreaRegistry;
-import com.github.eng1c2g4.eng1c2g4.entity.component.PlayerComponent;
 import com.github.eng1c2g4.eng1c2g4.entity.component.PositionComponent;
 import com.github.eng1c2g4.eng1c2g4.entity.component.VelocityComponent;
 import java.util.Set;
@@ -18,7 +17,7 @@ public final class MovementSystem extends IteratingSystem {
     private static final ComponentMapper<VelocityComponent> VELOCITY = ComponentMapper.getFor(VelocityComponent.class);
 
     public MovementSystem() {
-        super(Family.all(PositionComponent.class, VelocityComponent.class, PlayerComponent.class).get());
+        super(Family.all(PositionComponent.class, VelocityComponent.class).get());
     }
 
     @Override
